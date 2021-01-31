@@ -1,0 +1,7 @@
+
+from django.urls import path
+from .views import PayOnlineAPIView
+
+urlpatterns = [
+    path('promo-codes/', PayOnlineAPIView.as_view(), name='promo_codes'),
+]

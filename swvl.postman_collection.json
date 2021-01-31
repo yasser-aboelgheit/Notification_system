@@ -1,0 +1,442 @@
+{
+	"info": {
+		"_postman_id": "a1614524-b781-45c9-a968-b4aef3609fa3",
+		"name": "swvl",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "passengers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "passengers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/accounts/passengers/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts",
+								"passengers",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 31 Jan 2021 22:54:57 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.5.6"
+						},
+						{
+							"key": "Content-Length",
+							"value": "198"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"name\": \" \"\n    },\n    {\n        \"name\": \"Yasser\"\n    },\n    {\n        \"name\": \"Yasser\"\n    },\n    {\n        \"name\": \"Yasser\"\n    },\n    {\n        \"name\": \"Yasser\"\n    },\n    {\n        \"name\": \"Yasser\"\n    },\n    {\n        \"name\": \"Yasser\"\n    },\n    {\n        \"name\": \"Yasser 4\"\n    },\n    {\n        \"name\": \"Yasser 4\"\n    },\n    {\n        \"name\": \"Yasser\"\n    },\n    {\n        \"name\": \"Yasser\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "register-passenger",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"yasser8@adsda.com\",\n  \"password\": \"P@ss1234\",\n  \"phone_number\": \"01064384307\",\n  \"work_address\": \"WORK\",\n  \"home_address\":\"bla bla\",\n  \"name\":\"Yasser\",\n  \"notification_langauge\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/accounts/passenger-register/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"accounts",
+						"passenger-register",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "register-passenger",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"yasser8@mail.com\",\n  \"password\": \"P@ss1234\",\n  \"phone_number\": \"01064384307\",\n  \"work_address\": \"WORK\",\n  \"home_address\":\"bla bla\",\n  \"name\":\"Yasser\",\n  \"notification_langauge\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/accounts/passenger-register/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts",
+								"passenger-register",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 31 Jan 2021 22:49:46 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.5.6"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Account registration successful\"\n}"
+				}
+			]
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"access\", jsonData.token);",
+							"",
+							"// TEST",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "yasser8@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "P@ss1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/token/?=",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"token",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "yasser8@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "P@ss1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/token/?=",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"token",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 31 Jan 2021 22:56:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.5.6"
+						},
+						{
+							"key": "Content-Length",
+							"value": "441"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2NjFiOTllNzA0OTU0NTk0OTkxZDliODVkM2ZlMzczNyIsInVzZXJfaWQiOjYxLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYxMjIyMDIxMn0.Ftljda_iHttZfCEykNOKqLru2ZS8FAQ7y6kukc3_XdA\",\n    \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyYzkyYzM1MWI5ZmU0Y2FlOTNmYjgzODhhOGRhYjhlMyIsInVzZXJfaWQiOjYxLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjEyMTM1NjEyfQ.NpJgvgCDbrUOiwy0ONDrlX9tG8NrkEQy4jEExvUKatI\"\n}"
+				}
+			]
+		},
+		{
+			"name": "promo-codes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "promo_code",
+							"value": "SWVL2010",
+							"type": "text"
+						},
+						{
+							"key": "expire_at",
+							"value": "27/2/2021",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/notifications/promo-codes/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notifications",
+						"promo-codes",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "promo-codes",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "promo_code",
+									"value": "SWVL2010",
+									"type": "text"
+								},
+								{
+									"key": "expire_at",
+									"value": "27/2/2021",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/notifications/promo-codes/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"promo-codes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 31 Jan 2021 22:56:17 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.5.6"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Cookie"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Promo codes will be sent to all users\"\n}"
+				}
+			]
+		}
+	]
+}
