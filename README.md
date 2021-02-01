@@ -16,5 +16,5 @@ Notification service based on Django Rest framework
 
 ## Architecture
 * Table in the database for notifications which notifications' templates are saved
-* create two queues in celery "tasks" and "tasks2" where "tasks" has higher priority, this queue is for tasks that may go ```diff @@ obsolete @@ ``` such as dropoff location notification 
+* create two queues in celery "tasks" and "tasks2" where "tasks" has higher priority, this queue is for tasks that may go ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) 'obsolete' such as dropoff location notification 
 - rate limit for celery tasks 10/m and max_retries=3
