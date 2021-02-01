@@ -15,6 +15,15 @@ Notification service based on Django Rest framework
 * Note the file swvl.postman_collection.json which is a postman collection I created for this task, you can easily import it and find a saved response for each API
 
 ## Architecture
+
 * Table in the database for notifications which notifications' templates are saved
-* create two queues in celery "tasks" and "tasks2" where "tasks" has higher priority, this queue is for tasks that may go ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) 'obsolete' such as dropoff location notification 
-- rate limit for celery tasks 10/m and max_retries=3
+* create two queues in celery "tasks" and "tasks2" where "tasks" has higher priority, this queue is for tasks that may go **obsolete** such as dropoff location notification 
+- rate limit for celery tasks 10/m and max retries is 3 for each task
+- To make things easier on running the project it loads a record for notifications table from fixture created already to save you the trouble of populating the database
+
+## Installation
+
+after cloning the project and making sure that docker-compose is up and running
+use docker-compose build
+then docker-compose up
+
