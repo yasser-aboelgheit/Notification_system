@@ -8,10 +8,8 @@ Notification service based on Django Rest framework
 * Docker: containerization
 * Swagger: API documentation
 * SQLite3: Database
-Multi languages (currently Arabic and English)
-Supports SMS and push notification
-Group notifications for marketing campaigns
-Ready to integrate with any SMS or Push notification provider
-###hello
-#########hello
+
+# APIs Documentation
+* Navigate to http://localhost:8000/doc, the url for swagger which is a service for automatic documentation of APIs.
+* Note the file swvl.postman_collection.json which is a postman collection I created for this task, you can easily import it and find a saved response for each API
 
