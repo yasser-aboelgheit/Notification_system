@@ -24,6 +24,6 @@ Notification service based on Django Rest framework
 ## Installation
 
 after cloning the project and making sure that docker-compose is up and running
-use docker-compose build
-then docker-compose up
+use 'docker-compose build'
+then 'docker-compose up'
 
