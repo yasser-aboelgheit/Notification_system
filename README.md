@@ -27,5 +27,8 @@ after cloning the project and making sure that docker-compose is up and running
 use `docker-compose build`
 then `docker-compose up`
 
-## project UML
+## Project UML
 ![my_project_visualized](https://user-images.githubusercontent.com/21153250/106403454-7db62500-6437-11eb-9031-5cc3af281ba4.png)
+
+##Test
+ To be added by the end of 1/2/2021
