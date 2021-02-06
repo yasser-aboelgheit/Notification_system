@@ -1,0 +1,51 @@
+> import factory
+> from faker import Faker
+> faker = Faker()
+> from .models import Passenger, Driver
+  
+> from django.contrib.auth.models import User
+  
+  
+> class UserFactory(factory.django.DjangoModelFactory):
+  
+>     class Meta:
+>         model = User
+  
+>     first_name = factory.Faker('first_name')
+>     last_name = factory.Faker('last_name')
+>     username = factory.Faker('safe_email')
+>     email = factory.Faker('safe_email')
+>     password = factory.Faker('password')
+  
+  
+> class PassengerFactory(factory.django.DjangoModelFactory):
+  
+>     class Meta:
+>         model = Passenger
+          
+>     user = factory.SubFactory(UserFactory)
+>     username = factory.Faker('safe_email')
+>     name = factory.Faker('name')
+>     active = True
+>     phone_number = ("01001287771")
+>     home_address = factory.Faker('name')
+>     work_address = factory.Faker('name')
+>     notification_langauge = 0
+>     updated_at = factory.Faker('date_time')
+>     created_at = factory.Faker('date_time')
+  
+> class DriverFactory(factory.django.DjangoModelFactory):
+  
+>     class Meta:
+>         model = Driver
+          
+>     user = factory.SubFactory(UserFactory)
+>     username = factory.Faker('safe_email')
+>     name = factory.Faker('name')
+>     active = True
+>     phone_number = ("01001287771")
+>     years_of_experience = 5
+>     driver_license_number = factory.Faker('fake_license')
+>     national_id = factory.Faker('fake_id')
+>     updated_at = factory.Faker('date_time')
+>     created_at = factory.Faker('date_time')

@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "my_env/bin/python",
+    "terminal.integrated.shellArgs.windows": null,
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pycodestyleArgs": [
+        "--max-line-length=120"
+    ]
+}

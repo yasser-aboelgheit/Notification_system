@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Passenger
 from django.contrib.auth.models import User
 
+
 class PassengerSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -21,5 +22,5 @@ class PassengerRegisterSerializer(serializers.Serializer):
     def validate_username(self, value):
         user = User.objects.filter(username=value)
         if user.count() != 0:
-            raise serializers.ValidationError("this email is already registered", 409)
+            raise serializers.ValidationError("this email is already registered")
         return value

@@ -28,8 +28,8 @@ class PassengerFactory(factory.django.DjangoModelFactory):
     name = factory.Faker('name')
     active = True
     phone_number = ("01001287771")
-    home_address = factory.Faker('home_address')
-    work_address = factory.Faker('work_address')
+    home_address = factory.Faker('name')
+    work_address = factory.Faker('name')
     notification_langauge = 0
     updated_at = factory.Faker('date_time')
     created_at = factory.Faker('date_time')

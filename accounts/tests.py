@@ -1,3 +1,82 @@
+import json
+import simplejson
+from rest_framework.test import APITestCase
+from .factories import PassengerFactory, UserFactory
+from django.urls import reverse
 from django.test import TestCase
+from .celery_tasks import send_sms_on_register
+from django.contrib.auth.models import User
 
-# Create your tests here.
+
+class TestSelfRegisterViewSet(APITestCase):
+    def setUp(self):
+        self.passenger = PassengerFactory.create()
+        self.url = reverse('passenger-register')
+        self.data = {
+            "username": "new19@adsda.com",
+            "password": "P@ss1234",
+            "phone_number": "01064384307",
+            "work_address": "WORK",
+            "home_address": "bla bla",
+            "name": "Yasser",
+                    "notification_langauge": 0
+        }
+
+    def test_regsteration_successful(self):
+        response = self.client.post(self.url, self.data)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data.get("message"),
+                         "Account registration successful")
+
+    def test_using_same_email(self):
+        response = self.client.post(self.url, self.data)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data.get("message"),
+                         "Account registration successful")
+
+        response = self.client.post(self.url, self.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data['username'][0],
+                         "this email is already registered")
+
+
+class TestSendSmsOnRegister(TestCase):
+    def test_response(self):
+        passenger_name = "unique"
+        phone_number = "01091522823"
+        celery_task = send_sms_on_register(passenger_name, phone_number)
+        self.assertEqual(celery_task, True)
+
+        with open('debug.log', 'r') as f:
+            lines = f.read().splitlines()
+            last_line = lines[-1]
+            matching = [s for s in lines if "unique" in s]
+        self.assertEqual(matching[-1], "<SMS sent to %s> Dear %s, Welcome to SWVL!" % (
+            phone_number, passenger_name))
+
+
+class TestPassengerAPIView(APITestCase):
+    def setUp(self):
+        self.passenger1 = PassengerFactory.create()
+        self.passenger2 = PassengerFactory.create()
+        self.login_credentials = {
+            'username': 'test1', 'password': 'testpassword'}
+        User.objects.create_user(
+            **self.login_credentials)
+        self.url = reverse('passengers')
+        self.login_url = reverse('token_obtain_pair')
+
+    def test_credentials(self):
+        response = self.client.post(self.url)
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.data.get("detail"),
+                         "Authentication credentials were not provided.")
+
+    def test_successful_return(self):
+        login_response = self.client.post(
+            self.login_url, self.login_credentials)
+        token = login_response.data.get("access")
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        response = self.client.get(self.url)
+        self.assertEqual(simplejson.loads(json.dumps(response.data)), [{"name": self.passenger1.name},
+                                                                       {"name": self.passenger2.name}])

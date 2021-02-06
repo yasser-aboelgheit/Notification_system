@@ -1,0 +1,40 @@
+> from django.db import models
+> from django.contrib.auth.models import User
+  
+  
+> class Profile(models.Model):
+>     """Base profile model"""
+  
+>     class Meta:
+>         abstract = True
+  
+>     user = models.OneToOneField(
+>         User, related_name="%(app_label)s_%(class)s_related", on_delete=models.CASCADE)
+>     username = models.CharField(max_length=16, null=True, blank=True, unique=True)
+>     name = models.CharField(max_length=30)
+>     active = models.BooleanField(null=False, default=False)
+>     phone_number = models.CharField(max_length=16)
+>     updated_at = models.DateTimeField(auto_now=True)
+>     created_at = models.DateTimeField(auto_now_add=True)
+  
+  
+> class Passenger(Profile):
+>     """Passenger model for passenger users"""
+>     ENGLISH = 0
+>     ARABIC = 1
+  
+>     NOTIFICATION_LANGUAGE_CHOICES = (
+>         (ENGLISH, 'english'),
+>         (ARABIC, 'arabic')
+>     )
+  
+>     home_address = models.CharField(max_length=128)
+>     work_address = models.CharField(max_length=128)
+>     notification_langauge = models.IntegerField(
+>         choices=NOTIFICATION_LANGUAGE_CHOICES, default=0)
+  
+> class Driver(Profile):
+>     """Driver model for driver users"""
+>     years_of_experience = models.IntegerField()
+>     driver_license_number = models.CharField(max_length=128)
+>     national_id = models.CharField(max_length=16, null=True, blank=True)

@@ -102,7 +102,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 
-
 STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -112,7 +111,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
-SWAGGER_SETTINGS = { 'SECURITY_DEFINITIONS': { 'api_key': { 'type': 'apiKey', 'in': 'header', 'name': 'Authorization' } }, }
+SWAGGER_SETTINGS = {'SECURITY_DEFINITIONS': {'api_key': {
+    'type': 'apiKey', 'in': 'header', 'name': 'Authorization'}}, }
 
 # Celery without docker
 # CELERY_BROKER_URL = 'redis://localhost:6379/0'

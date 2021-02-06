@@ -1,7 +1,7 @@
 
 from django.urls import path
-from .views import PayOnlineAPIView
+from .views import SendPromoAPIView
 
 urlpatterns = [
-    path('promo-codes/', PayOnlineAPIView.as_view(), name='promo_codes'),
+    path('promo-codes/', SendPromoAPIView.as_view(), name='promo_codes'),
 ]

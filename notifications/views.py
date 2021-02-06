@@ -1,12 +1,12 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .celery import send_sms_on_promo
+from .celery_tasks import send_sms_on_promo
 from .serializers import PromoCodeSerializer
 from accounts.models import Passenger
 from rest_framework import generics
 
 
-class PayOnlineAPIView(generics.CreateAPIView):
+class SendPromoAPIView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = PromoCodeSerializer
 

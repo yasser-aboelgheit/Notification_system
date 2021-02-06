@@ -1,0 +1,23 @@
+> from rest_framework.permissions import IsAuthenticated
+> from rest_framework.response import Response
+> from .celery import send_sms_on_promo
+> from .serializers import PromoCodeSerializer
+> from accounts.models import Passenger
+> from rest_framework import generics
+  
+  
+> class PayOnlineAPIView(generics.CreateAPIView):
+>     permission_classes = (IsAuthenticated,)
+>     serializer_class = PromoCodeSerializer
+  
+>     def post(self, request, *args, **kwargs):
+!         serializer = self.serializer_class(data=self.request.data)
+!         if not serializer.is_valid():
+!             return Response(serializer.errors, 400)
+!         passengers = Passenger.objects.filter(active=True)
+!         for passenger in passengers:
+!             send_sms_on_promo.s(serializer.validated_data["promo_code"],
+!                                 serializer.validated_data["expire_at"],
+!                                 passenger.id).apply_async(queue="tasks2")
+  
+!         return Response({"message": "Promo codes will be sent to all users"})
