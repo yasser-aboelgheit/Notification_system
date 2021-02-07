@@ -34,13 +34,6 @@ services:
             - web
             - redis
             - celery
-    test:
-        build: .
-        command: python manage.py test 
-        depends_on:
-            - web
-            - redis
-            - celery
     test-coverage:
         build: .
         command: bash -c "coverage run --source='.' --omit 'my_env/*' manage.py test && coverage report"
