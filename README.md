@@ -20,6 +20,8 @@ Notification service based on Django Rest framework
 * create two queues in celery "tasks" and "tasks2" where "tasks" has higher priority, this queue is for tasks that may go **obsolete** such as dropoff location notification 
 - rate limit for celery tasks 10/m and max retries is 3 for each task
 - To make things easier on running the project it loads a record for notifications table from fixture created already to save you the trouble of populating the database
+- Use loggers instead of sms provider and push notifications
+
 
 ## Installation
 
@@ -32,3 +34,7 @@ then `docker-compose up`
 
 ## Test
  Use `docker-compose run test` to run tests
+
+## Test Coverage
+
+![Screenshot from 2021-02-07 13-54-25](https://user-images.githubusercontent.com/21153250/107145767-779ad980-694c-11eb-874e-cff818260d6e.png)
