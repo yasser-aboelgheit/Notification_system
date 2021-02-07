@@ -34,3 +34,7 @@ then `docker-compose up`
 
 ## Test
  Use `docker-compose run test` to run tests
+
+## Test Coverage
+
+![Screenshot from 2021-02-07 13-54-25](https://user-images.githubusercontent.com/21153250/107145767-779ad980-694c-11eb-874e-cff818260d6e.png)
